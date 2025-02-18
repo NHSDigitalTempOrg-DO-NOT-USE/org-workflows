@@ -1,0 +1,25 @@
+name: Check Dependabot Alerts
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  security-events: read
+  contents: read
+  pull-requests: write  # Required for PR comments
+
+jobs:
+  check-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: nhs-england-tools/dependabot-policy-enforcer
+        with:
+          github-app-id: ${{ secrets.DEPENDABOT_POLICY_ENFORCER_APP_ID }}
+          github-installation-id: ${{ secrets.DEPENDABOT_POLICY_ENFORCER_INSTALLATION_ID }}
+          github-app-private-key: ${{ secrets.DEPENDABOT_POLICY_ENFORCER_PRIVATE_KEY }}
+          critical-threshold: 3
+          high-threshold: 5
+          medium-threshold: 14
+          low-threshold: 30
+          report-mode: true
