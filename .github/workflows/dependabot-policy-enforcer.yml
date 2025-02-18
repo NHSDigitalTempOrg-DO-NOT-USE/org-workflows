@@ -13,7 +13,7 @@ jobs:
   check-alerts:
     runs-on: ubuntu-latest
     steps:
-      - uses: nhs-england-tools/dependabot-policy-enforcer
+      - uses: nhs-england-tools/dependabot-policy-enforcer@v0.0.1
         with:
           github-app-id: ${{ secrets.DEPENDABOT_POLICY_ENFORCER_APP_ID }}
           github-installation-id: ${{ secrets.DEPENDABOT_POLICY_ENFORCER_INSTALLATION_ID }}
